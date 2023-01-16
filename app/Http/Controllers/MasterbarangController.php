@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Masterbarang;
 use Illuminate\Http\Request;
+use DB;
 
 class MasterbarangController extends Controller
 {
@@ -14,7 +15,9 @@ class MasterbarangController extends Controller
      */
     public function index()
     {
-        //
+        $barang = DB::table('m_barang')->get();
+        dd($barang);
+        
     }
 
     /**
@@ -24,8 +27,9 @@ class MasterbarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('masterbarang.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -33,9 +37,26 @@ class MasterbarangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode_barang'=> 'required',
+            'kode_sub_kelompok'=> 'required',
+            'nama_barang'=> 'required',
+            'satuan'=> 'required',
+        ]);
+
+        $result = Masterbarang::create([
+                'kode_barang'=> $request->kode_barang,
+                'kode_sub_kelompok'=> $request->kode_sub_kelompok,
+                'nama_barang'=> $request->nama_barang,
+                'satuan'=> $request->satuan,
+                'created_by' => '1',
+            ]);
+        // redirect 
+        return redirect()->route('masterbarang.index')
+                        ->with('success','Data Master Barang Successfuly inserted');
     }
 
     /**
