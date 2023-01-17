@@ -143,24 +143,9 @@
             </a>
           </li>
           
-          @if (Auth::check())
-          
-          @if(Auth::user()->id == 17 OR Auth::user()->id == 94 OR Auth::user()->id == 95 OR Auth::user()->id == 96 OR Auth::user()->id == 97  OR Auth::user()->id == 98 OR Auth::user()->id == 15)
-          <li class="nav-item">
-            <a href="{{ url('/alurbatch/adminrekap')}}" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Rekap Batch Total (Adm)
-              </p>
-            </a>
-          </li>
-          @endif
-          
-          @endif
-          
           <li class="nav-header">Kamus</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ url('masterbarang')}}" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
                 Master Barang
@@ -168,10 +153,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ url('masterbarang/create')}}" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
-                 Rekapitulasi Petugas
+                 Tambah Master Barang
               </p>
             </a>
           </li>
@@ -180,7 +165,7 @@
           <li class="nav-item">
             <a href="#" class="nav-link" target="_blank">
               <i class="nav-icon fas fa-ellipsis-h"></i>
-              <p>Tentang Simplemen</p>
+              <p>Tentang Simbaper</p>
             </a>
           </li>
           <li class="nav-item">
