@@ -16,7 +16,7 @@ class MasterbarangController extends Controller
     public function index()
     {
         $barang = DB::table('m_barang')->get();
-        dd($barang);
+        return view('masterbarang.index', compact('barang'))->with('i', (request()->input('page', 1) - 1) * 5);
         
     }
 
@@ -76,9 +76,10 @@ class MasterbarangController extends Controller
      * @param  \App\Models\Masterbarang  $masterbarang
      * @return \Illuminate\Http\Response
      */
-    public function edit(Masterbarang $masterbarang)
+    public function edit($kode_barang)
     {
-        //
+        $barang = DB::table('m_barang')->where('kode_barang', $kode_barang)->first();
+        return view('masterbarang.edit',compact('barang'));
     }
 
     /**
@@ -88,9 +89,20 @@ class MasterbarangController extends Controller
      * @param  \App\Models\Masterbarang  $masterbarang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Masterbarang $masterbarang)
+    public function update(Request $request, $kode_barang)
     {
-        //
+        $barang = Masterbarang::find($kode_barang);        
+
+        if($barang) {
+            $barang->kode_barang = $request->kode_barang;
+            $barang->kode_sub_kelompok = $request->kode_sub_kelompok;
+            $barang->nama_barang = $request->nama_barang;
+            $barang->satuan = $request->satuan;
+            $barang->created_by = '1';
+            $barang->updated_at = now();
+            $barang->save();
+        }
+        return redirect()->route('masterbarang.index')->with('success', 'The barang updated successfully');
     }
 
     /**
@@ -99,8 +111,13 @@ class MasterbarangController extends Controller
      * @param  \App\Models\Masterbarang  $masterbarang
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Masterbarang $masterbarang)
+    public function destroy($kode_barang)
     {
-        //
+        //Hapus Data
+        $barang = Masterbarang::find($kode_barang); 
+        $barang->delete();
+
+        // setelah berhasil hapus
+        return redirect('/masterbarang');
     }
 }

@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Edit Master Barang</h1>
+                        <h1 class="m-0">Input Peta</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Data</li>
+                            <li class="breadcrumb-item active">Input Data</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -39,34 +39,33 @@
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4 class="card-title">Edit Master Barang :</h4>                         
+                                <h4 class="card-title">Input Data Master Persediaan Barang :</h4>                         
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('masterbarang.update',$barang->kode_barang) }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-
+                            <form action="{{ route('masterbarang.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf  
                                 <div class="card-body">
+                                    
                                     <div class="form-group">
-                                        <strong><label>Kode Barang:</label></strong>
-                                        <input type="text" name="kode_barang" class="form-control" placeholder="001B" value="{{$barang->kode_barang}}">
+                                        <strong><label>Kode barang :</label></strong>
+                                        <input type="text" name="kode_barang" class="form-control">
+                                    </div> 
+                                    <div class="form-group">
+                                        <strong><label>Kode sub Kelompok :</label></strong>
+                                        <input type="text" name="kode_sub_kelompok" class="form-control">
                                     </div>                                    
                                     <div class="form-group">
-                                        <strong><label>Kode Sub Kelompok:</label></strong>
-                                        <input type="text" name="kode_sub_kelompok" class="form-control" placeholder="001B" value="{{$barang->kode_sub_kelompok}}">
+                                        <strong><label>Nama barang :</label></strong>
+                                        <input type="text" name="nama_barang" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <strong><label>Nama Barang :</label></strong>
-                                        <input type="text" name="nama_barang" class="form-control" placeholder="001" value="{{$barang->nama_barang}}">
-                                    </div>
-                                    <div class="form-group">
-                                        <strong><label>Satuan Barang :</label></strong>
-                                        <input type="text" name="satuan" class="form-control" placeholder="001" value="{{$barang->satuan}}">
+                                        <strong><label>Satuan :</label></strong>
+                                        <input type="text" name="satuan" id="satuan" class="form-control">
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>

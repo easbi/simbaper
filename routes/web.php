@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MasterbarangController;
+use App\Http\Controllers\TransaksimasukController;
+use App\Http\Controllers\TransaksikeluarController;
+use App\Http\Controllers\OpnameController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +21,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('masterbarang', MasterbarangController::class);
+Route::resource('masterbarang', MasterbarangController::class)->parameters([
+    'masterbarang' => 'kode_barang'
+]);
+Route::resource('transaksimasuk', TransaksimasukController::class);
+Route::resource('transaksikeluar', TransaksikeluarController::class);
+Route::resource('opname', OpnameController::class)->parameters([
+    'opname' => 'kode_barang'
+]);
+
