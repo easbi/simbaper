@@ -50,7 +50,7 @@
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $tr->no_bon }}</td>
-                                    <td>{{ $tr->kode_barang }}</td>
+                                    <td>{{ $tr->nama_barang }}</td>
                                     <td>{{ $tr->harga }}</td>
                                     <td>{{ $tr->kuantitas }}</td>
                                     <td>

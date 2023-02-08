@@ -17,7 +17,7 @@ class TransaksimasukController extends Controller
      */
     public function index()
     {
-        $transaksimasuk = DB::table('t_masuk')->get();
+        $transaksimasuk = DB::table('t_masuk')->join('m_barang AS A', 'A.kode_barang', 't_masuk.kode_barang')->get();
         return view('transaksimasuk.index', compact('transaksimasuk'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -104,9 +104,10 @@ class TransaksimasukController extends Controller
      * @param  \App\Models\Transaksimasuk  $transaksimasuk
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaksimasuk $transaksimasuk)
+    public function edit($id)
     {
-        //
+        $barang = DB::table('t_masuk')->where('t_masuk.id', $id)->join('m_barang AS A', 'A.kode_barang', 't_masuk.kode_barang')->first();
+        return view('transaksimasuk.edit', compact('barang'));
     }
 
     /**
@@ -116,7 +117,7 @@ class TransaksimasukController extends Controller
      * @param  \App\Models\Transaksimasuk  $transaksimasuk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaksimasuk $transaksimasuk)
+    public function update(Request $request, $id)
     {
         //
     }

@@ -43,26 +43,32 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('masterbarang.update',$barang->kode_barang) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('transaksimasuk.update',$id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <strong><label>Kode Barang:</label></strong>
-                                        <input type="text" name="kode_barang" class="form-control" placeholder="001B" value="{{$barang->kode_barang}}">
-                                    </div>                                    
-                                    <div class="form-group">
-                                        <strong><label>Kode Sub Kelompok:</label></strong>
-                                        <input type="text" name="kode_sub_kelompok" class="form-control" placeholder="001B" value="{{$barang->kode_sub_kelompok}}">
-                                    </div>
+                                        <strong><label>No Bon :</label></strong>
+                                        <input type="text" name="no_bon" class="form-control" value="{{ $barang->no_bon }}">
+                                    </div>  
                                     <div class="form-group">
                                         <strong><label>Nama Barang :</label></strong>
-                                        <input type="text" name="nama_barang" class="form-control" placeholder="001" value="{{$barang->nama_barang}}">
+                                        <select id="kode_barang" name="kode_barang" class="form-control">
+                                            <option value="" selected disabled>{{ $barang->nama_barang }}</option>
+                                        </select>
+                                    </div> 
+                                    <div class="form-group">
+                                        <strong><label>Harga :</label></strong>
+                                        <input type="number" name="harga" class="form-control" value="{{ $barang->harga }}">
+                                    </div>                                    
+                                    <div class="form-group">
+                                        <strong><label>Kuantitas :</label></strong>
+                                        <input type="text" name="kuantitas" class="form-control" value="{{ $barang->kuantitas }}">
                                     </div>
                                     <div class="form-group">
-                                        <strong><label>Satuan Barang :</label></strong>
-                                        <input type="text" name="satuan" class="form-control" placeholder="001" value="{{$barang->satuan}}">
+                                        <strong><label>Tgl Masuk :</label></strong>
+                                        <input type="date" name="tgl_masuk" id="tgl_masuk" class="form-control" value="{{ $barang->tgl_masuk }}">
                                     </div>
                                 </div>
                                 <div class="card-footer">

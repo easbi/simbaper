@@ -43,7 +43,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('masterbarang.update',$barang->kode_barang) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('transaksikeluar.update',$id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
