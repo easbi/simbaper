@@ -119,7 +119,8 @@ class TransaksimasukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $transaksimasuk = DB::table('t_masuk')->join('m_barang AS A', 'A.kode_barang', 't_masuk.kode_barang')->get();
+        return view('transaksimasuk.index', compact('transaksimasuk'));
     }
 
     /**
