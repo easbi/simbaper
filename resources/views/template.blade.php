@@ -87,7 +87,7 @@
           </li>
           <li class="nav-header">Dokumen di Pengolahan</li> 
           <li class="nav-item">
-            <a href="{{ url('/alurpengolahan/')}}" class="nav-link">
+            <a href="{{ url('/transaksikeluar/')}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Transaksi Keluar
@@ -95,7 +95,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('/alurpengolahan/selfrekap')}}" class="nav-link">
+            <a href="{{ url('/transaksimasuk')}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Transaksi Masuk

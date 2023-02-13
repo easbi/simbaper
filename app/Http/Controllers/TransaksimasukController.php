@@ -119,8 +119,28 @@ class TransaksimasukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $transaksimasuk = DB::table('t_masuk')->join('m_barang AS A', 'A.kode_barang', 't_masuk.kode_barang')->get();
-        return view('transaksimasuk.index', compact('transaksimasuk'));
+        $transaksimasuk = Transaksimasuk::find($id);
+        $tm = Opname::find($transaksimasuk->kode_barang); 
+
+        if ($tm) #update table stock
+        {
+            $tm->quantity = $tm->quantity - $transaksimasuk->kuantitas + $request->kuantitas;
+            $tm->quantity_opname = $tm->quantity_opname - $transaksimasuk->kuantitas + $request->kuantitas;
+            $tm->created_by = '1';
+            $tm->updated_at = now();
+            $tm->save();   
+        }      
+       
+        if($transaksimasuk) {
+            $transaksimasuk->no_bon = $request->no_bon;
+            $transaksimasuk->harga = $request->harga;
+            $transaksimasuk->kuantitas = $request->kuantitas;
+            $transaksimasuk->tgl_masuk = $request->tgl_masuk;
+            $transaksimasuk->created_by = 1;           
+            $transaksimasuk->updated_at = now()->timestamp;
+            $transaksimasuk->save();
+        }
+        return redirect()->route('transaksimasuk.index')->with('success', 'Transaksimasuk sudah terupdate');
     }
 
     /**
@@ -129,8 +149,17 @@ class TransaksimasukController extends Controller
      * @param  \App\Models\Transaksimasuk  $transaksimasuk
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaksimasuk $transaksimasuk)
+    public function destroy($id)
     {
-        //
+        $barang = Transaksimasuk::find($id);
+        $tm = Opname::find($barang->kode_barang); #update table stock
+        $tm->quantity = $tm->quantity - $barang->kuantitas;
+        $tm->quantity_opname = $tm->quantity_opname - $barang->kuantitas;
+        $tm->created_by = '1';
+        $tm->updated_at = now();
+        $tm->save();   
+
+        $barang->delete();
+        return redirect('/transaksimasuk');
     }
 }
