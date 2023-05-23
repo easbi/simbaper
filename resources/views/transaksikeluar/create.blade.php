@@ -39,29 +39,29 @@
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4 class="card-title">Input Data Master Persediaan Barang :</h4>                         
+                                <h4 class="card-title">Input Data Transaksi Masuk Persediaan Barang :</h4>                         
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('masterbarang.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('transaksimasuk.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf  
-                                <div class="card-body">
-                                    
+                                <div class="card-body"> 
                                     <div class="form-group">
-                                        <strong><label>Kode barang :</label></strong>
-                                        <input type="text" name="kode_barang" class="form-control">
-                                    </div> 
+                                        <strong><label>Nama Barang :</label></strong>
+                                        <select id="kode_barang" name="kode_barang" class="form-control">
+                                            <option value="" selected disabled>Select</option>
+                                            @foreach($master_barang as $mb)
+                                            <option value="{{$mb->kode_barang}}"> {{$mb->nama_barang}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>                                   
                                     <div class="form-group">
-                                        <strong><label>Kode sub Kelompok :</label></strong>
-                                        <input type="text" name="kode_sub_kelompok" class="form-control">
-                                    </div>                                    
-                                    <div class="form-group">
-                                        <strong><label>Nama barang :</label></strong>
-                                        <input type="text" name="nama_barang" class="form-control">
+                                        <strong><label>Kuantitas :</label></strong>
+                                        <input type="text" name="kuantitas" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <strong><label>Satuan :</label></strong>
-                                        <input type="text" name="satuan" id="satuan" class="form-control">
+                                        <strong><label>Tgl Pengamnbilan :</label></strong>
+                                        <input type="date" name="tgl_keluar" id="tgl_keluar" class="form-control">
                                     </div>
                                 </div>
                                 <div class="card-footer">

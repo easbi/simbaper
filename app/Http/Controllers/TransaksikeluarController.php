@@ -15,7 +15,8 @@ class TransaksikeluarController extends Controller
      */
     public function index()
     {
-        //
+        $transaksikeluar = DB::table('t_keluar')->join('m_barang AS A', 'A.kode_barang', 't_keluar.kode_barang')->get();
+        return view('transaksikeluar.index', compact('transaksikeluar'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -25,8 +26,8 @@ class TransaksikeluarController extends Controller
      */
     public function create()
     {
-        $barang = DB::table('m_barang')->get();
-        return view('transaksikeluar.create');
+        $master_barang = DB::table('m_barang')->get();
+        return view('transaksikeluar.create', compact('master_barang'));
     }
 
     /**
@@ -37,7 +38,48 @@ class TransaksikeluarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode_barang'=> 'required',
+            'kuantitas'=> 'required',
+            'tgl_keluar'=> 'required',
+        ]);
+        $tm = Opname::find($request->kode_barang);
+
+        $result = Transaksimasuk::create([
+                'no_bon'=> $request->no_bon,
+                'kode_barang'=> $request->kode_barang,
+                'harga'=> $request->harga,
+                'kuantitas'=> $request->kuantitas,
+                'tgl_masuk'=> $request->tgl_masuk,
+                'created_by' => '1',
+            ]);     
+    
+
+        if (Opname::where('kode_barang', $request->kode_barang )->first()) {
+            //jika kode barang ada maka update entitas tersebut
+            $tm->kode_barang = $request->kode_barang;
+            $tm->quantity = $tm->quantity + $request->kuantitas;
+            $tm->quantity_opname = $tm->quantity_opname +$request->kuantitas;
+            $tm->created_by = '1';
+            $tm->updated_at = now();
+            $tm->save();            
+        } else {
+            //jika kode barang ga ada, maka buat entitas baru di transaksi masuk
+            $opname = Opname::create([
+                'kode_barang'=> $request->kode_barang,
+                'quantity'=> $request->kuantitas,
+                'quantity_opname'=> $request->kuantitas,
+                'created_by' => '1',
+            ]);       
+            
+        }
+       
+        
+
+
+        // redirect 
+        return redirect()->route('transaksimasuk.index')
+                        ->with('success','Data Transaksi Masuk Successfuly inserted');
     }
 
     /**
