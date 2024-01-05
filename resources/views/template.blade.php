@@ -85,7 +85,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">Dokumen di Pengolahan</li> 
+          <li class="nav-header">Alur Barang Persediaan</li> 
           <li class="nav-item">
             <a href="{{ url('/transaksikeluar/')}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -102,53 +102,14 @@
               </p>
             </a>
           </li>
-          @if (Auth::check())
-          
-          @if(Auth::user()->id == 17 OR Auth::user()->id == 94 OR Auth::user()->id == 95 OR Auth::user()->id == 96 OR Auth::user()->id == 97  OR Auth::user()->id == 98 OR Auth::user()->id == 15)
-          <li class="nav-item">
-            <a href="{{ url('/alurpengolahan/adminrekap')}}" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Rekap Entri (Adm)
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ url('/alurpengolahan/kinerjapp')}}" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Rekap Kinerja Petugas (Adm)
-              </p>
-            </a>
-          </li>
-          @endif
-          
-          @endif
 
-          <li class="nav-header">Dokumen di Batching</li> 
-          <li class="nav-item">
-            <a href="{{ url('/alurbatch')}}" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Dokumen Belum Batch
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ url('/alurbatch/selfrekap')}}" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Dokumen Sudah Batch
-              </p>
-            </a>
-          </li>
-          
-          <li class="nav-header">Kamus</li>
+                   
+          <li class="nav-header">Stock Persediaan</li>
           <li class="nav-item">
             <a href="{{ url('masterbarang')}}" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
-                Master Barang
+                Stock Barang
               </p>
             </a>
           </li>

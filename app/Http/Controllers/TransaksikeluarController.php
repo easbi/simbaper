@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaksikeluar;
+use App\Models\Transaksimasuk;
+use App\Models\Masterbarang;
+use App\Models\Opname;
 use Illuminate\Http\Request;
 use DB;
 
@@ -45,21 +48,19 @@ class TransaksikeluarController extends Controller
         ]);
         $tm = Opname::find($request->kode_barang);
 
-        $result = Transaksimasuk::create([
-                'no_bon'=> $request->no_bon,
+        $result = Transaksikeluar::create([
                 'kode_barang'=> $request->kode_barang,
-                'harga'=> $request->harga,
                 'kuantitas'=> $request->kuantitas,
-                'tgl_masuk'=> $request->tgl_masuk,
-                'created_by' => '1',
-            ]);     
+                'tgl_keluar'=> $request->tgl_keluar,
+                'pemakai' => '1',
+            ]);      
     
 
         if (Opname::where('kode_barang', $request->kode_barang )->first()) {
             //jika kode barang ada maka update entitas tersebut
             $tm->kode_barang = $request->kode_barang;
-            $tm->quantity = $tm->quantity + $request->kuantitas;
-            $tm->quantity_opname = $tm->quantity_opname +$request->kuantitas;
+            $tm->quantity = $tm->quantity - $request->kuantitas;
+            $tm->quantity_opname = $tm->quantity_opname - $request->kuantitas;
             $tm->created_by = '1';
             $tm->updated_at = now();
             $tm->save();            
@@ -72,14 +73,11 @@ class TransaksikeluarController extends Controller
                 'created_by' => '1',
             ]);       
             
-        }
-       
+        }      
         
-
-
         // redirect 
-        return redirect()->route('transaksimasuk.index')
-                        ->with('success','Data Transaksi Masuk Successfuly inserted');
+        return redirect()->route('transaksikeluar.index')
+                        ->with('success','Data Transaksi Keluar Successfuly inserted');
     }
 
     /**

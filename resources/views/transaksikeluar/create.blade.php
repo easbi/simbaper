@@ -43,7 +43,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('transaksimasuk.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('transaksikeluar.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf  
                                 <div class="card-body"> 
                                     <div class="form-group">
@@ -60,7 +60,7 @@
                                         <input type="text" name="kuantitas" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <strong><label>Tgl Pengamnbilan :</label></strong>
+                                        <strong><label>Tgl Pengambilan :</label></strong>
                                         <input type="date" name="tgl_keluar" id="tgl_keluar" class="form-control">
                                     </div>
                                 </div>

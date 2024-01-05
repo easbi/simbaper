@@ -15,7 +15,15 @@ class MasterbarangController extends Controller
      */
     public function index()
     {
-        $barang = DB::table('m_barang')->get();
+        $barang = DB::table('t_stock')
+                    ->join('m_barang', 'm_barang.kode_barang', 't_stock.kode_barang')
+                    ->select(
+                        't_stock.*',
+                        'm_barang.kode_sub_kelompok',
+                        'm_barang.nama_barang', 
+                        'm_barang.satuan')
+                    ->get();
+        // dd($barang);
         return view('masterbarang.index', compact('barang'))->with('i', (request()->input('page', 1) - 1) * 5);
         
     }

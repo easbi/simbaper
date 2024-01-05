@@ -55,7 +55,7 @@
 
                       <div class="info-box-content">
                         <span class="info-box-text">Jumlah Barang</span>
-                        <span class="info-box-number">11</span>
+                        <span class="info-box-number">XX</span>
                       </div>
                       <!-- /.info-box-content -->
                     </div>
@@ -72,7 +72,7 @@
 
                       <div class="info-box-content">
                         <span class="info-box-text">Jumlah Kelompok Barang</span>
-                        <span class="info-box-number">11</span>
+                        <span class="info-box-number">XX</span>
                       </div>
                       <!-- /.info-box-content -->
                     </div>
@@ -85,7 +85,7 @@
 
                       <div class="info-box-content">
                         <span class="info-box-text">Akun Pengguna</span>
-                        <span class="info-box-number">11</span>
+                        <span class="info-box-number">XX</span>
                       </div>
                       <!-- /.info-box-content -->
                     </div>
@@ -104,6 +104,7 @@
                                     <th>Kode Barang</th>
                                     <th>Kode Sub Kelompok</th>
                                     <th>Nama Barang</th>
+                                    <th>Jumlah</th>                                    
                                     <th>Satuan</th>
                                     <th>Aksi</th>
                             </tr>    
@@ -115,6 +116,7 @@
                                     <td>{{ $br->kode_barang }}</td>
                                     <td>{{ $br->kode_sub_kelompok }}</td>
                                     <td>{{ $br->nama_barang }}</td>
+                                    <td>{{ $br->quantity }}</td>
                                     <td>{{ $br->satuan }}</td>
                                     <td>
                                         <form action="{{ route('masterbarang.destroy',$br->kode_barang) }}" method="POST">
