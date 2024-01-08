@@ -7,10 +7,16 @@ use App\Models\Transaksimasuk;
 use App\Models\Masterbarang;
 use App\Models\Opname;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class TransaksikeluarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +24,17 @@ class TransaksikeluarController extends Controller
      */
     public function index()
     {
-        $transaksikeluar = DB::table('t_keluar')->join('m_barang AS A', 'A.kode_barang', 't_keluar.kode_barang')->get();
+        $transaksikeluar = DB::table('t_keluar')
+                            ->join('m_barang AS A', 'A.kode_barang', 't_keluar.kode_barang')
+                            ->join('users AS B', 't_keluar.pemakai', 'B.id')
+                            ->select(
+                                        't_keluar.*',
+                                        'A.kode_sub_kelompok',
+                                        'A.nama_barang', 
+                                        'A.satuan',
+                                        'B.fullname'
+                                    )
+                            ->get();
         return view('transaksikeluar.index', compact('transaksikeluar'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -52,7 +68,7 @@ class TransaksikeluarController extends Controller
                 'kode_barang'=> $request->kode_barang,
                 'kuantitas'=> $request->kuantitas,
                 'tgl_keluar'=> $request->tgl_keluar,
-                'pemakai' => '1',
+                'pemakai' => Auth::user()->id,
             ]);      
     
 
@@ -61,7 +77,7 @@ class TransaksikeluarController extends Controller
             $tm->kode_barang = $request->kode_barang;
             $tm->quantity = $tm->quantity - $request->kuantitas;
             $tm->quantity_opname = $tm->quantity_opname - $request->kuantitas;
-            $tm->created_by = '1';
+            $tm->created_by = Auth::user()->id;
             $tm->updated_at = now();
             $tm->save();            
         } else {
@@ -70,7 +86,7 @@ class TransaksikeluarController extends Controller
                 'kode_barang'=> $request->kode_barang,
                 'quantity'=> $request->kuantitas,
                 'quantity_opname'=> $request->kuantitas,
-                'created_by' => '1',
+                'created_by' => Auth::user()->id,
             ]);       
             
         }      
@@ -97,9 +113,11 @@ class TransaksikeluarController extends Controller
      * @param  \App\Models\Transaksikeluar  $transaksikeluar
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaksikeluar $transaksikeluar)
+    public function edit($kode_barang)
     {
-        //
+        $master_barang = DB::table('m_barang')->get();
+        $kode_barang = $kode_barang;
+        return view('transaksikeluar.edit', compact('master_barang', 'kode_barang'));
     }
 
     /**

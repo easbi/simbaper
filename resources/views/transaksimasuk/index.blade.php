@@ -10,12 +10,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Transaksi Masuk</h1>
+                        <h1 class="m-0">Transaksi Masuk Barang Persediaan</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="treadcrumb float-sm-right">
                             <li class="treadcrumb-item"><a href="#">Home</a></li>
-                            <li class="treadcrumb-item active">Beranda</li>
+                            <li class="treadcrumb-item active">Transaksi Masuk</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

@@ -10,7 +10,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Master Barang</h1>
+                        <h1 class="m-0">Master Barang </h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -39,9 +39,9 @@
                       <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
                       <div class="info-box-content">
-                        <span class="info-box-text">Master Barang</span>
+                        <span class="info-box-text">Jumlah Pemakaian</span>
                         <span class="info-box-number">
-                          Master Barang
+                          {{$jumlah_pakai}}
                         </span>
                       </div>
                       <!-- /.info-box-content -->
@@ -55,7 +55,7 @@
 
                       <div class="info-box-content">
                         <span class="info-box-text">Jumlah Barang</span>
-                        <span class="info-box-number">XX</span>
+                        <span class="info-box-number">{{$jumlah_barang}}</span>
                       </div>
                       <!-- /.info-box-content -->
                     </div>
@@ -72,7 +72,7 @@
 
                       <div class="info-box-content">
                         <span class="info-box-text">Jumlah Kelompok Barang</span>
-                        <span class="info-box-number">XX</span>
+                        <span class="info-box-number">{{$jumlah_kelompok}}</span>
                       </div>
                       <!-- /.info-box-content -->
                     </div>
@@ -85,7 +85,7 @@
 
                       <div class="info-box-content">
                         <span class="info-box-text">Akun Pengguna</span>
-                        <span class="info-box-number">XX</span>
+                        <span class="info-box-number">{{ $jumlah_akun }}</span>
                       </div>
                       <!-- /.info-box-content -->
                     </div>
@@ -104,7 +104,7 @@
                                     <th>Kode Barang</th>
                                     <th>Kode Sub Kelompok</th>
                                     <th>Nama Barang</th>
-                                    <th>Jumlah</th>                                    
+                                    <th>Jumlah Tersedia</th>                                    
                                     <th>Satuan</th>
                                     <th>Aksi</th>
                             </tr>    
@@ -121,14 +121,16 @@
                                     <td>
                                         <form action="{{ route('masterbarang.destroy',$br->kode_barang) }}" method="POST">
                          
-                                            <a class="btn btn-info btn-sm" href="{{ route('masterbarang.show',$br->kode_barang) }}">Show</a>
-                                                                     
+                                            <a class="btn btn-info btn-sm" href="{{ route('transaksikeluar.edit',$br->kode_barang) }}">Pakai</a>
+                                            
+                                            @if(Auth::user()->id == 1)                         
                                             <a class="btn btn-primary btn-sm" href="{{ route('masterbarang.edit',$br->kode_barang) }}">Edit</a>
                          
                                             @csrf
                                             @method('DELETE')
                          
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+                                            @endif
                                         </form>
                                     </td>
                                 </tr>

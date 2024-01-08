@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Masterbarang;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class MasterbarangController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +21,7 @@ class MasterbarangController extends Controller
     public function index()
     {
         $barang = DB::table('t_stock')
+                    ->where('quantity', '>', 0)
                     ->join('m_barang', 'm_barang.kode_barang', 't_stock.kode_barang')
                     ->select(
                         't_stock.*',
@@ -24,7 +30,14 @@ class MasterbarangController extends Controller
                         'm_barang.satuan')
                     ->get();
         // dd($barang);
-        return view('masterbarang.index', compact('barang'))->with('i', (request()->input('page', 1) - 1) * 5);
+
+        $jumlah_barang = DB::table('m_barang')->count();                    
+        $jumlah_akun = DB::table('users')->count();
+        $jumlah_kelompok = DB::table('m_barang')->distinct('kode_sub_kelompok')->count();
+        $jumlah_pakai = DB::table('t_keluar')->count();
+        
+        // dd($jumlah_kelompok);
+        return view('masterbarang.index', compact('barang', 'jumlah_akun', 'jumlah_barang', 'jumlah_kelompok', 'jumlah_pakai'))->with('i', (request()->input('page', 1) - 1) * 5);
         
     }
 

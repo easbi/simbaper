@@ -6,10 +6,15 @@ use App\Models\Transaksimasuk;
 use App\Models\Masterbarang;
 use App\Models\Opname;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class TransaksimasukController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -56,7 +61,7 @@ class TransaksimasukController extends Controller
                 'harga'=> $request->harga,
                 'kuantitas'=> $request->kuantitas,
                 'tgl_masuk'=> $request->tgl_masuk,
-                'created_by' => '1',
+                'created_by' => Auth::user()->id,
             ]);     
     
 
@@ -65,7 +70,7 @@ class TransaksimasukController extends Controller
             $tm->kode_barang = $request->kode_barang;
             $tm->quantity = $tm->quantity + $request->kuantitas;
             $tm->quantity_opname = $tm->quantity_opname +$request->kuantitas;
-            $tm->created_by = '1';
+            $tm->created_by = Auth::user()->id;
             $tm->updated_at = now();
             $tm->save();            
         } else {
@@ -74,7 +79,7 @@ class TransaksimasukController extends Controller
                 'kode_barang'=> $request->kode_barang,
                 'quantity'=> $request->kuantitas,
                 'quantity_opname'=> $request->kuantitas,
-                'created_by' => '1',
+                'created_by' => Auth::user()->id,
             ]);       
             
         }

@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Input Peta</h1>
+                        <h1 class="m-0">Pemakaian Barang Persediaan</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -39,7 +39,7 @@
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4 class="card-title">Input Data Transaksi Masuk Persediaan Barang :</h4>                         
+                                <h4 class="card-title">Input Data Transaksi Pemakaian Persediaan Barang :</h4>                         
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->

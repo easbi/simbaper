@@ -17,9 +17,8 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MasterbarangController::class, 'index']);
+Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
 
 Route::resource('masterbarang', MasterbarangController::class)->parameters([
     'masterbarang' => 'kode_barang'

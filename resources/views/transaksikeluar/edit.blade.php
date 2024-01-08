@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Edit Master Barang</h1>
+                        <h1 class="m-0">Pemakaian Barang Persediaan</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Data</li>
+                            <li class="breadcrumb-item active">Input Data</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -39,34 +39,32 @@
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4 class="card-title">Edit Master Barang :</h4>                         
+                                <h4 class="card-title">Input Data Transaksi Pemakaian Persediaan Barang :</h4>                         
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('transaksikeluar.update',$id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('transaksikeluar.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                @method('PUT')
-
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <strong><label>Kode Barang:</label></strong>
-                                        <input type="text" name="kode_barang" class="form-control" placeholder="001B" value="{{$barang->kode_barang}}">
-                                    </div>                                    
-                                    <div class="form-group">
-                                        <strong><label>Kode Sub Kelompok:</label></strong>
-                                        <input type="text" name="kode_sub_kelompok" class="form-control" placeholder="001B" value="{{$barang->kode_sub_kelompok}}">
-                                    </div>
+                                <div class="card-body"> 
                                     <div class="form-group">
                                         <strong><label>Nama Barang :</label></strong>
-                                        <input type="text" name="nama_barang" class="form-control" placeholder="001" value="{{$barang->nama_barang}}">
+                                        <select id="kode_barang" name="kode_barang" class="form-control">
+                                            @foreach($master_barang as $mb)
+                                            <option value="{{ $mb->kode_barang }}" {{ ( $mb->kode_barang == $kode_barang) ? 'selected' : '' }}"> {{$mb->nama_barang}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>                                   
+                                    <div class="form-group">
+                                        <strong><label>Kuantitas :</label></strong>
+                                        <input type="text" name="kuantitas" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <strong><label>Satuan Barang :</label></strong>
-                                        <input type="text" name="satuan" class="form-control" placeholder="001" value="{{$barang->satuan}}">
+                                        <strong><label>Tgl Pengambilan :</label></strong>
+                                        <input type="date" name="tgl_keluar" id="tgl_keluar" class="form-control">
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>

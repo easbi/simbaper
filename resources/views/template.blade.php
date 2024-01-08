@@ -64,7 +64,7 @@
         </div>
         <div class="info">
           @if (Auth::check())
-            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+            <a href="#" class="d-block">{{ Auth::user()->fullname }}</a>
           @else
             <a href="#" class="d-block">Guest</a>
           @endif
@@ -86,19 +86,21 @@
             </a>
           </li>
           <li class="nav-header">Alur Barang Persediaan</li> 
-          <li class="nav-item">
-            <a href="{{ url('/transaksikeluar/')}}" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Transaksi Keluar
-              </p>
-            </a>
-          </li>
+          @if(Auth::user()->id == 1)   
           <li class="nav-item">
             <a href="{{ url('/transaksimasuk')}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Transaksi Masuk
+              </p>
+            </a>
+          </li>
+          @endif
+          <li class="nav-item">
+            <a href="{{ url('/transaksikeluar/')}}" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Transaksi Pemakaian
               </p>
             </a>
           </li>
@@ -113,6 +115,8 @@
               </p>
             </a>
           </li>
+
+           @if(Auth::user()->id == 1)
           <li class="nav-item">
             <a href="{{ url('masterbarang/create')}}" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
@@ -121,6 +125,7 @@
               </p>
             </a>
           </li>
+          @endif
 
           <li class="nav-header">MISCELLANEOUS</li>
           <li class="nav-item">
