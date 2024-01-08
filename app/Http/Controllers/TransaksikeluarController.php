@@ -116,8 +116,16 @@ class TransaksikeluarController extends Controller
     public function edit($kode_barang)
     {
         $master_barang = DB::table('m_barang')->get();
+        $stock_barang = DB::table('t_stock')
+                            ->join('m_barang as A', 'A.kode_barang', 't_stock.kode_barang')
+                            ->select('t_stock.*','A.*')
+                            ->where('A.kode_barang', $kode_barang)
+                            ->first();
         $kode_barang = $kode_barang;
-        return view('transaksikeluar.edit', compact('master_barang', 'kode_barang'));
+
+        // dd($stock_barang->quantity);
+
+        return view('transaksikeluar.edit', compact('master_barang', 'kode_barang', 'stock_barang'));
     }
 
     /**

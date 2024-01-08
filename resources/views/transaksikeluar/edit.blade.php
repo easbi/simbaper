@@ -56,7 +56,16 @@
                                     </div>                                   
                                     <div class="form-group">
                                         <strong><label>Kuantitas :</label></strong>
-                                        <input type="text" name="kuantitas" class="form-control">
+                                        <div class="row">
+
+                                        <div class="col-7">
+                                            <input type="text" name="kuantitas" class="form-control">
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="text" disabled name="kuantitas" class="form-control" value=" Stok tersedia {{$stock_barang->quantity}} {{$stock_barang->satuan}}">
+                                        </div>
+
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <strong><label>Tgl Pengambilan :</label></strong>
