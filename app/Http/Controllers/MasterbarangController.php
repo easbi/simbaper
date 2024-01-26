@@ -6,6 +6,7 @@ use App\Models\Masterbarang;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class MasterbarangController extends Controller
 {
@@ -66,14 +67,23 @@ class MasterbarangController extends Controller
             'kode_sub_kelompok'=> 'required',
             'nama_barang'=> 'required',
             'satuan'=> 'required',
+            'featured_image' => 'required|image|max:1024|mimes:jpg,jpeg,png',
         ]);
+
+        if ($request->hasFile('featured_image')) {
+             // put image in the public storage
+            $filePath = Storage::disk('public')->put('images/barang_stock', request()->file('featured_image'));
+            $validated['featured_image'] = $filePath;
+        }
+
 
         $result = Masterbarang::create([
                 'kode_barang'=> $request->kode_barang,
                 'kode_sub_kelompok'=> $request->kode_sub_kelompok,
                 'nama_barang'=> $request->nama_barang,
                 'satuan'=> $request->satuan,
-                'created_by' => '1',
+                'featured_image' => $filePath,
+                'created_by' =>  Auth::user()->id,
             ]);
         // redirect 
         return redirect()->route('masterbarang.index')
@@ -100,6 +110,7 @@ class MasterbarangController extends Controller
     public function edit($kode_barang)
     {
         $barang = DB::table('m_barang')->where('kode_barang', $kode_barang)->first();
+        // dd($barang);
         return view('masterbarang.edit',compact('barang'));
     }
 
@@ -112,14 +123,23 @@ class MasterbarangController extends Controller
      */
     public function update(Request $request, $kode_barang)
     {
-        $barang = Masterbarang::find($kode_barang);        
+        $barang = Masterbarang::find($kode_barang);       
+
+        if ($request->hasFile('featured_image')) {
+            // delete image
+            // Storage::disk('public')->delete($barang->featured_image);  #hapus nya dipake nanti setelah semua gambar stok ada semua
+
+            $filePath = Storage::disk('public')->put('images/barang_stock', request()->file('featured_image'), 'public');
+            $validated['featured_image'] = $filePath;
+        } 
 
         if($barang) {
             $barang->kode_barang = $request->kode_barang;
             $barang->kode_sub_kelompok = $request->kode_sub_kelompok;
             $barang->nama_barang = $request->nama_barang;
             $barang->satuan = $request->satuan;
-            $barang->created_by = '1';
+            $barang->created_by = Auth::user()->id;
+            $barang->featured_image = $filePath;
             $barang->updated_at = now();
             $barang->save();
         }

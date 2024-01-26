@@ -48,12 +48,13 @@
                                 <div class="card-body"> 
                                     <div class="form-group">
                                         <strong><label>Nama Barang :</label></strong>
-                                        <select id="kode_barang" name="kode_barang" class="form-control">
-                                            @foreach($master_barang as $mb)
-                                            <option value="{{ $mb->kode_barang }}" {{ ( $mb->kode_barang == $kode_barang) ? 'selected' : '' }}"> {{$mb->nama_barang}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>                                   
+                                        <input type="text" disabled name="kuantitas" class="form-control" value="{{$stock_barang->nama_barang}}">
+                                    </div>  
+                                    <div class="form-group">
+                                        <strong><label>Gambar/Ilustrasi Barang :</label></strong>
+                                        <br>
+                                        <img width='300' height='300' src="{{ asset('storage/' . $stock_barang->featured_image) }}" alt="{{ $stock_barang->nama_barang }}">
+                                    </div>                                
                                     <div class="form-group">
                                         <strong><label>Kuantitas :</label></strong>
                                         <div class="row">

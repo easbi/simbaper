@@ -63,6 +63,11 @@
                                         <strong><label>Satuan :</label></strong>
                                         <input type="text" name="satuan" id="satuan" class="form-control">
                                     </div>
+                                    <div class="form-group">
+                                        <strong><label>Foto :</label></strong>
+                                        <input type="file" name="featured_image" id="featured_image" class="form-control">
+                                    </div>
+
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Submit</button>

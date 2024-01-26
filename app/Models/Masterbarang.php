@@ -16,7 +16,8 @@ class Masterbarang extends Model
         'kode_barang',
         'kode_sub_kelompok',
         'nama_barang',
-        'satuan',        
+        'satuan',  
+        'featured_image',
         'created_by', 
         'created_at', 
         'updated_at'

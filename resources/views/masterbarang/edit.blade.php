@@ -63,6 +63,11 @@
                                     <div class="form-group">
                                         <strong><label>Satuan Barang :</label></strong>
                                         <input type="text" name="satuan" class="form-control" placeholder="001" value="{{$barang->satuan}}">
+                                    </div>                                    
+                                    <div class="form-group">
+                                        <strong><label>Foto :</label></strong>
+                                         <img src="{{ asset('storage/' . $barang->featured_image) }}" alt="{{ $barang->nama_barang }}">
+                                        <input type="file" name="featured_image" id="featured_image" class="form-control">
                                     </div>
                                 </div>
                                 <div class="card-footer">
