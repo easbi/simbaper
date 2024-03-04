@@ -5,6 +5,7 @@ use App\Http\Controllers\MasterbarangController;
 use App\Http\Controllers\TransaksimasukController;
 use App\Http\Controllers\TransaksikeluarController;
 use App\Http\Controllers\OpnameController;
+use App\Http\Controllers\PermintaanController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
 Route::resource('masterbarang', MasterbarangController::class)->parameters([
     'masterbarang' => 'kode_barang'
 ]);
+Route::resource('permintaan', PermintaanController::class);
 Route::resource('transaksimasuk', TransaksimasukController::class);
 Route::resource('transaksikeluar', TransaksikeluarController::class);
 Route::resource('opname', OpnameController::class)->parameters([

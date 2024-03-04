@@ -86,7 +86,7 @@
             </a>
           </li>
           <li class="nav-header">Alur Barang Persediaan</li> 
-          @if(Auth::user()->id == 1)   
+          @if(Auth::user()->id == 1 OR Auth::user()->id == 14)   
           <li class="nav-item">
             <a href="{{ url('/transaksimasuk')}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -101,6 +101,14 @@
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Transaksi Pemakaian
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/permintaan/')}}" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Transaksi Usul Persediaan
               </p>
             </a>
           </li>
