@@ -95,6 +95,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('/transaksimasuk/create')}}" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Catat Transaksi Masuk
+              </p>
+            </a>
+          </li>
           @endif
           <li class="nav-item">
             <a href="{{ url('/transaksikeluar/')}}" class="nav-link">
@@ -124,7 +132,7 @@
             </a>
           </li>
 
-           @if(Auth::user()->id == 1)
+          @if(Auth::user()->id == 1 OR Auth::user()->id == 14)
           <li class="nav-item">
             <a href="{{ url('masterbarang/create')}}" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>

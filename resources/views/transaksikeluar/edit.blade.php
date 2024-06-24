@@ -49,11 +49,12 @@
                                     <div class="form-group">
                                         <strong><label>Nama Barang :</label></strong>
                                         <input type="text" disabled name="kuantitas" class="form-control" value="{{$stock_barang->nama_barang}}">
+                                        <input type="hidden" name="kode_barang" value="{{$stock_barang->kode_barang}}">
                                     </div>  
                                     <div class="form-group">
                                         <strong><label>Gambar/Ilustrasi Barang :</label></strong>
                                         <br>
-                                        <img width='300' height='300' src="{{ asset('storage/' . $stock_barang->featured_image) }}" alt="{{ $stock_barang->nama_barang }}">
+                                        <img width='300' height='300' src="{{ asset('foto_barang/' . $stock_barang->featured_image) }}" alt="{{ $stock_barang->nama_barang }}">
                                     </div>                                
                                     <div class="form-group">
                                         <strong><label>Kuantitas :</label></strong>

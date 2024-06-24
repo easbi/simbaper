@@ -8,6 +8,7 @@ use App\Models\Masterbarang;
 use App\Models\Opname;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use DB;
 
 class TransaksikeluarController extends Controller
@@ -58,7 +59,6 @@ class TransaksikeluarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_barang'=> 'required',
             'kuantitas'=> 'required',
             'tgl_keluar'=> 'required',
         ]);
