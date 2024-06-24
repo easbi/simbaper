@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Masterbarang;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -72,8 +73,11 @@ class MasterbarangController extends Controller
 
         if ($request->hasFile('featured_image')) {
              // put image in the public storage
-            $filePath = Storage::disk('public')->put('images/barang_stock', request()->file('featured_image'));
-            $validated['featured_image'] = $filePath;
+            // $filePath = Storage::disk('public')->put('foto_barang', request()->file('featured_image'));
+            $file = $request->file('featured_image');
+            $filePath = \Carbon\Carbon::now()->format('Y-m-d H-i').'_'. Auth::user()->nip .'_'. str_replace(' ', '', substr(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME), 0, 25)). '.' .$file->getClientOriginalExtension();
+            $file->move('foto_barang', $filePath);
+            // $validated['featured_image'] = $filePath;
         }
 
 
@@ -129,8 +133,12 @@ class MasterbarangController extends Controller
             // delete image
             // Storage::disk('public')->delete($barang->featured_image);  #hapus nya dipake nanti setelah semua gambar stok ada semua
 
-            $filePath = Storage::disk('public')->put('images/barang_stock', request()->file('featured_image'), 'public');
-            $validated['featured_image'] = $filePath;
+            // $filePath = Storage::disk('public')->put('images/barang_stock', request()->file('featured_image'), 'public');
+            // $validated['featured_image'] = $filePath;
+            $file = $request->file('featured_image');
+            $filePath = \Carbon\Carbon::now()->format('Y-m-d H-i').'_'. Auth::user()->nip .'_'. str_replace(' ', '', substr(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME), 0, 25)). '.' .$file->getClientOriginalExtension();
+            $file->move('foto_barang', $filePath);
+            // $validated['featured_image'] = $filePath;
         } 
 
         if($barang) {
