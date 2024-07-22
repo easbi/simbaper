@@ -7,6 +7,9 @@ use App\Http\Controllers\TransaksikeluarController;
 use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\PermintaanController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+use App\Http\Controllers\FormPermintaanGenerate;
+use App\Http\Controllers\KwitansiController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +23,9 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 Route::get('/', [MasterbarangController::class, 'index']);
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
+Route::get('/kwitansi', [KwitansiController::class, 'index']);
+// Route::post('/kwitansi', [KwitansiController::class, 'exportExcel'])->name('generatePermintaan');
+Route::get('/test/{id}/{tgl}', [KwitansiController::class, 'generateKwitansi'])->name('generateKwitansi');
 
 Route::resource('masterbarang', MasterbarangController::class)->parameters([
     'masterbarang' => 'kode_barang'

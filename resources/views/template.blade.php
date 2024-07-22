@@ -17,6 +17,8 @@
     <!-- Datatable CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -85,8 +87,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">Alur Barang Persediaan</li> 
-          @if(Auth::user()->id == 1 OR Auth::user()->id == 14)   
+          <li class="nav-header">Alur Barang Persediaan</li>
+          @if(Auth::user()->id == 1 OR Auth::user()->id == 14)
           <li class="nav-item">
             <a href="{{ url('/transaksimasuk')}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -121,7 +123,6 @@
             </a>
           </li>
 
-                   
           <li class="nav-header">Stock Persediaan</li>
           <li class="nav-item">
             <a href="{{ url('masterbarang')}}" class="nav-link">
@@ -131,6 +132,17 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-header">Form</li>
+          <li class="nav-item">
+            <a href="{{ url('kwitansi')}}" class="nav-link">
+              <i class="nav-icon far fa-sticky-note"></i>
+              <p>
+                Kwitansi Permintaan
+              </p>
+            </a>
+          </li>
+
 
           @if(Auth::user()->id == 1 OR Auth::user()->id == 14)
           <li class="nav-item">
@@ -187,7 +199,7 @@
   </footer>
 </div>
 <!-- ./wrapper -->
- 
+
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
@@ -207,8 +219,8 @@
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.colVis.min.js"></script>
 
-
-
+<!-- Select2 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="{{asset('adminlte/plugins/chart.js/Chart.min.js')}}"></script>
