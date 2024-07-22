@@ -90,9 +90,10 @@ class KwitansiController extends Controller
                                             ->selectRaw('t_keluar.pemakai as kode_pemakai,
                                                         users.fullname as nama_pemakai,
                                                         users.nip as nip_pemakai,
+                                                        users.organisasi as organisasi,
                                                         t_keluar.tgl_keluar,
                                                         SUM(t_keluar.kuantitas) as total')
-                                            ->groupBy('users.fullname', 't_keluar.pemakai', 't_keluar.tgl_keluar', 'users.nip')
+                                            ->groupBy('users.fullname', 't_keluar.pemakai', 't_keluar.tgl_keluar', 'users.nip', 'users.organisasi')
                                             ->get();
 
         // Add position order
@@ -119,11 +120,11 @@ class KwitansiController extends Controller
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($templatePath);
         $sheet = $spreadsheet->getActiveSheet();
 
-        $dummydate = '2024' . '-' . 'April' . '-1';
-        $sheet->setCellValue('C' . 9, $request->nama_pemakai);
+        // $dummydate = '2024' . '-' . 'April' . '-1';
+        $sheet->setCellValue('C' . 9, $request->organisasi);
         $sheet->setCellValue('F' . 9, "No. ".$request->row_index);
         // $sheet->setCellValue('F' . 10, "Dibukukan : ". carbon::parse($dummydate)->startOfMonth()->translatedFormat('j F Y'));
-        $sheet->setCellValue('F' . 10, "Dibukukan : . . . . . . . . 2024");
+        $sheet->setCellValue('F' . 10, "Dibukukan : .................. 2024");
         $sheet->setCellValue('E' . 30, "Padang Panjang, ". carbon::parse($request->tgl_keluar)->translatedFormat('j F Y'));
         $sheet->setCellValue('E' . 35, $request->nama_pemakai);
         $sheet->setCellValue('E' . 36, "NIP. ".$request->nip_pemakai);
