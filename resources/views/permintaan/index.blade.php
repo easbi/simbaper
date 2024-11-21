@@ -63,7 +63,7 @@
                                             Menunggu Persetujuan
                                         @endif
                                     </td>
-                                    @if(Auth::user()->id == 1 OR Auth::user()->id == 14)
+                                    @if(Auth::user()->id == 1 OR Auth::user()->id == 14 OR Auth::user()->id == 17)
                                     <td>
                                         <form action="{{ route('permintaan.destroy',$tr->id) }}" method="POST">
                                             <a class="btn btn-primary btn-sm" href="{{ route('permintaan.edit',$tr->id) }}">Edit</a>
