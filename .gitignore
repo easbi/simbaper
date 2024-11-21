@@ -1,13 +1,9 @@
-/node_modules
-/public/build
 /public/foto_barang
 /public/adminlte
-/public/template.xlsx
 /public/foto_barang.zip
 /public/hot
 /public/storage
 /storage/*.key
-/vendor
 .env
 .env.backup
 .env.production
