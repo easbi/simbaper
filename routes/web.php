@@ -30,6 +30,13 @@ Route::get('/test/{id}/{tgl}', [KwitansiController::class, 'generateKwitansi'])-
 Route::resource('masterbarang', MasterbarangController::class)->parameters([
     'masterbarang' => 'kode_barang'
 ]);
+
+Route::get('/masterbarang', [MasterbarangController::class, 'index1'])->name('masterbarang');
+
+// Route::resource('masterbarang1', Masterbarang1Controller::class)->parameters([
+//     'masterbarang1' => 'kode_barang'
+// ]);
+
 Route::resource('permintaan', PermintaanController::class);
 Route::resource('transaksimasuk', TransaksimasukController::class);
 Route::resource('transaksikeluar', TransaksikeluarController::class);
