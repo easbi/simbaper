@@ -123,8 +123,8 @@
             </a>
           </li>
 
-          {{-- <li class="nav-header">Stock Persediaan</li>
-          <li class="nav-item">
+          <li class="nav-header">Stock Persediaan</li>
+          {{-- <li class="nav-item">
             <a href="{{ url('masterbarang')}}" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
@@ -136,7 +136,7 @@
             <a href="{{ url('masterbarang')}}" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
-                Stock Barang 
+                Stock Barang
               </p>
             </a>
           </li>
@@ -198,13 +198,21 @@
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
+  {{-- <footer class="main-footer">
     <strong>Copyright &copy;2022 <a href="https://padangpanjangkota.bps.go.id">BPS Kota Padang Panjang</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0.0
     </div>
-  </footer>
+  </footer> --}}
+  {{-- <footer class="main-footer" style="background-color: transparent; color: #000;">
+    <strong>Copyright &copy;2022 <a href="https://padangpanjangkota.bps.go.id">BPS Kota Padang Panjang</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.0.0
+    </div>
+</footer> --}}
+
 </div>
 <!-- ./wrapper -->
 

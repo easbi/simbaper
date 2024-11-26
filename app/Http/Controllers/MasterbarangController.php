@@ -43,6 +43,36 @@ class MasterbarangController extends Controller
         
     }
 
+    public function index1(Request $request)
+    {
+      
+        $search = $request->get('search'); 
+
+        $barang = DB::table('t_stock')
+                    ->where('quantity', '>', 0)
+                    ->join('m_barang', 'm_barang.kode_barang', 't_stock.kode_barang')
+                    ->select(
+                        't_stock.*',
+                        'm_barang.kode_sub_kelompok',
+                        'm_barang.nama_barang', 
+                        'm_barang.satuan',
+                        'm_barang.featured_image')
+                    ->when($search, function ($query, $search) {
+                            return $query->where('m_barang.nama_barang', 'like', "%{$search}%"); // Filter berdasarkan nama_barang
+                        })->get();
+             
+     
+        $jumlah_barang = DB::table('m_barang')->count();                    
+        $jumlah_akun = DB::table('users')->count();
+        $jumlah_kelompok = DB::table('m_barang')->distinct('kode_sub_kelompok')->count();
+        $jumlah_pakai = DB::table('t_keluar')->count();
+        
+        // dd($jumlah_kelompok);
+        return view('masterbarang.index1', compact('barang', 'jumlah_akun', 'jumlah_barang', 'jumlah_kelompok', 'jumlah_pakai'))->with('i', (request()->input('page', 1) - 1) * 5);
+        
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
