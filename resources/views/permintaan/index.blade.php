@@ -42,10 +42,9 @@
                                     <th>Kuantitas</th>
                                     <th>Keterangan</th>
                                     <th>Pengusul</th>
+                                    <th>Waktu Permintaan</th>
                                     <th>Penyelesaian</th>
-                                    @if(Auth::user()->id == 1)
                                     <th>Aksi</th>
-                                    @endif
                             </tr>    
                             </thead>
                             <tbody>
@@ -56,9 +55,10 @@
                                     <td>{{ $tr->kuantitas }}</td>
                                     <td>{{ $tr->keterangan }}</td>                                    
                                     <td>{{ $tr->fullname }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($tr->created_at)->format('d F Y') }}</td>
                                     <td>
                                         @if($tr->penyelesaian == 1) 
-                                            Sudah ditindaklanjuti
+                                            Ditindaklanjuti pada {{ \Carbon\Carbon::parse($tr->updated_at)->format('d F Y') }}
                                         @elseif($tr->penyelesaian == NULL)
                                             Menunggu Persetujuan
                                         @endif
