@@ -123,7 +123,7 @@
             </a>
           </li>
 
-          <li class="nav-header">Stock Persediaan</li>
+          {{-- <li class="nav-header">Stock Persediaan</li>
           <li class="nav-item">
             <a href="{{ url('masterbarang')}}" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
@@ -131,15 +131,15 @@
                 Stock Barang
               </p>
             </a>
-          </li>
-          {{-- <li class="nav-item">
-            <a href="{{ url('masterbarang1')}}" class="nav-link">
+          </li> --}}
+          <li class="nav-item">
+            <a href="{{ url('masterbarang')}}" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
-                Stock Barang New
+                Stock Barang 
               </p>
             </a>
-          </li> --}}
+          </li>
 
           <li class="nav-header">Form</li>
           <li class="nav-item">

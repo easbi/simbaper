@@ -34,7 +34,7 @@ class KwitansiController extends Controller
             'tahun' => DB::table('t_keluar')->selectRaw("DATE_FORMAT(tgl_keluar, '%Y') as year")
                                             ->distinct()
                                             ->get(),
-            'kwitansi' => (auth()->user()->id == 1 or auth()->user()->id == 14)
+            'kwitansi' => (auth()->user()->id == 1 or auth()->user()->id == 22 or auth()->user()->id == 14)
                 ? DB::table('t_keluar')
                     ->join('users', 't_keluar.pemakai', '=', 'users.id')
                     ->join('m_barang', 't_keluar.kode_barang', '=', 'm_barang.kode_barang')
