@@ -116,7 +116,7 @@
                                         {{-- <form action="{{ route('masterbarang.destroy',$br->kode_barang) }}" method="POST">
 
 
-                                            @if(Auth::user()->id == 1)
+                                            @if(Auth::user()->id == 1 OR Auth::user()->id == 14)
                                             <a class="btn btn-primary btn-sm" href="{{ route('masterbarang.edit',$br->kode_barang) }}">Edit</a>
 
                                             @csrf
