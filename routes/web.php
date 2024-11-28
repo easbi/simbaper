@@ -21,7 +21,7 @@ use App\Http\Controllers\KwitansiController;
 |
 */
 
-Route::get('/', [MasterbarangController::class, 'index']);
+Route::get('/', [MasterbarangController::class, 'index1']);
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
 Route::get('/kwitansi', [KwitansiController::class, 'index']);
 // Route::post('/kwitansi', [KwitansiController::class, 'exportExcel'])->name('generatePermintaan');
