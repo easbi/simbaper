@@ -1,5 +1,9 @@
 @extends('template')
- 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+
 @section('content')
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -8,7 +12,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Input Peta</h1>
+                        <h1 class="m-0">Input Transaksi Masuk</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -53,13 +57,13 @@
                                     </div>  
                                     <div class="form-group">
                                         <strong><label>Nama Barang :</label></strong>
-                                        <select id="kode_barang" name="kode_barang" class="form-control">
+                                        <select id="kode_barang" name="kode_barang" class="form-control select2">
                                             <option value="" selected disabled>Select</option>
                                             @foreach($master_barang as $mb)
                                             <option value="{{$mb->kode_barang}}"> {{$mb->nama_barang}}</option>
                                             @endforeach
                                         </select>
-                                    </div> 
+                                    </div>
                                     <div class="form-group">
                                         <strong><label>Harga :</label></strong>
                                         <input type="number" name="harga" class="form-control">
@@ -84,3 +88,15 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.select2').select2({
+      placeholder: "Pilih Nama Barang", 
+      allowClear: true                  
+    });
+  });
+</script>
+@endpush
+

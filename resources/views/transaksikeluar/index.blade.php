@@ -55,7 +55,7 @@
                                     <td>{{ $tr->kuantitas }}</td>
                                     <td>{{ $tr->tgl_keluar }}</td>                                    
                                     <td>{{ $tr->fullname }}</td>
-                                    @if(Auth::user()->id == 1)
+                                    @if(Auth::user()->id == 1 OR Auth::user()->id == 14 OR Auth::user()->id == 17)
                                     <td>
                                         <form action="{{ route('transaksikeluar.destroy',$tr->id) }}" method="POST">
                          

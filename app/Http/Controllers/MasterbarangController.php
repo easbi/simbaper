@@ -20,7 +20,7 @@ class MasterbarangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function list()
     {
         $barang = DB::table('t_stock')
                     ->where('quantity', '>', 0)
@@ -39,7 +39,7 @@ class MasterbarangController extends Controller
         $jumlah_pakai = DB::table('t_keluar')->count();
         
         // dd($jumlah_kelompok);
-        return view('masterbarang.index', compact('barang', 'jumlah_akun', 'jumlah_barang', 'jumlah_kelompok', 'jumlah_pakai'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('masterbarang.list', compact('barang', 'jumlah_akun', 'jumlah_barang', 'jumlah_kelompok', 'jumlah_pakai'))->with('i', (request()->input('page', 1) - 1) * 5);
         
     }
 
@@ -120,7 +120,7 @@ class MasterbarangController extends Controller
                 'created_by' =>  Auth::user()->id,
             ]);
         // redirect 
-        return redirect()->route('masterbarang.index')
+        return redirect()->route('masterbarang')
                         ->with('success','Data Master Barang Successfuly inserted');
     }
 

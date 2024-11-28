@@ -113,7 +113,8 @@
                             </div>
                             <a class='link-produk' href="{{ route('transaksikeluar.edit',$br->kode_barang) }}" target='_blank' title='Pakai'>
                                 PAKAI
-                            </a>
+                            </a>  
+                            <br>
                         </div>
                     </div>
                     @endforeach

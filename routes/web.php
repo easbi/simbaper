@@ -27,6 +27,8 @@ Route::get('/kwitansi', [KwitansiController::class, 'index']);
 // Route::post('/kwitansi', [KwitansiController::class, 'exportExcel'])->name('generatePermintaan');
 Route::get('/test/{id}/{tgl}', [KwitansiController::class, 'generateKwitansi'])->name('generateKwitansi');
 
+
+Route::get('/masterbarang/list', [MasterbarangController::class, 'list'])->name('masterbarang.list');
 Route::resource('masterbarang', MasterbarangController::class)->parameters([
     'masterbarang' => 'kode_barang'
 ]);

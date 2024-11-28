@@ -120,10 +120,8 @@
                                     <td>{{ $br->satuan }}</td>
                                     <td>
                                         <form action="{{ route('masterbarang.destroy',$br->kode_barang) }}" method="POST">
-                         
-                                            <a class="btn btn-info btn-sm" href="{{ route('transaksikeluar.edit',$br->kode_barang) }}">Pakai</a>
                                             
-                                            @if(Auth::user()->id == 1)                         
+                                            @if(Auth::user()->id == 1 OR Auth::user()->id == 14 OR Auth::user()->id == 17)                        
                                             <a class="btn btn-primary btn-sm" href="{{ route('masterbarang.edit',$br->kode_barang) }}">Edit</a>
                          
                                             @csrf
