@@ -181,7 +181,7 @@ class MasterbarangController extends Controller
             $barang->updated_at = now();
             $barang->save();
         }
-        return redirect()->route('masterbarang.index')->with('success', 'The barang updated successfully');
+        return redirect()->route('masterbarang.list')->with('success', 'The barang updated successfully');
     }
 
     /**
