@@ -120,7 +120,7 @@ class MasterbarangController extends Controller
                 'created_by' =>  Auth::user()->id,
             ]);
         // redirect 
-        return redirect()->route('masterbarang')
+        return redirect()->route('masterbarang.list')
                         ->with('success','Data Master Barang Successfuly inserted');
     }
 
