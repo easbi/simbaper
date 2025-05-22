@@ -28,6 +28,7 @@ class PermintaanController extends Controller
                                         't_permintaan.*',
                                         'B.fullname'
                                     )
+                                ->orderBy('t_permintaan.id', 'desc')
                                 ->get();
         return view('permintaan.index', compact('transaksipermintaan'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
