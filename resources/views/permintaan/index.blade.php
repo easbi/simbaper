@@ -16,6 +16,7 @@
                         <ol class="treadcrumb float-sm-right">
                             <li class="treadcrumb-item"><a href="#">Home</a></li>
                             <li class="treadcrumb-item active">Transaksi Usul</li>
+                            <li class="treadcrumb-item active"><a href="{{ url('/permintaan/create')}}"> Tambah Usulan</a></li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
