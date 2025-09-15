@@ -124,7 +124,7 @@ class KwitansiController extends Controller
         $sheet->setCellValue('C' . 9, $request->organisasi);
         $sheet->setCellValue('F' . 9, "No. ".$request->row_index);
         // $sheet->setCellValue('F' . 10, "Dibukukan : ". carbon::parse($dummydate)->startOfMonth()->translatedFormat('j F Y'));
-        $sheet->setCellValue('F' . 10, "Dibukukan : .................. 2024");
+        $sheet->setCellValue('F' . 10, "Dibukukan : .................. " . \Carbon\Carbon::parse($tgl)->year);
         $sheet->setCellValue('E' . 30, "Padang Panjang, ". carbon::parse($request->tgl_keluar)->translatedFormat('j F Y'));
         $sheet->setCellValue('E' . 35, $request->nama_pemakai);
         $sheet->setCellValue('E' . 36, "NIP. ".$request->nip_pemakai);
@@ -151,110 +151,6 @@ class KwitansiController extends Controller
 
         return response()->download($pdfFile)->deleteFileAfterSend(true);
     }
-
-    // public function exportExcel(Request $request)
-    // {
-    //     $tahun = $request->tahun;
-    //     $bulan = $request->bulan;
-
-    //     // dd($tahun);
-    //     $data = DB::table('t_keluar')->get();
-    //     $barang = DB::table('m_barang')->get();
-    //     $permintaan = DB::table('t_keluar') ->join('users', 't_keluar.pemakai', '=', 'users.id')
-    //                                         // ->whereYear('tgl_keluar', '=', date($tahun))
-    //                                         // ->whereMonth('tgl_keluar', '=', date($bulan))
-    //                                         ->orderBy('t_keluar.tgl_keluar')
-    //                                         ->selectRaw('t_keluar.pemakai as kode_pemakai,
-    //                                                     users.fullname as nama_pemakai,
-    //                                                     users.nip as nip_pemakai,
-    //                                                     t_keluar.tgl_keluar,
-    //                                                     SUM(t_keluar.kuantitas) as total')
-    //                                         ->groupBy('users.fullname', 't_keluar.pemakai', 't_keluar.tgl_keluar', 'users.nip')
-    //                                         ->get();
-
-    //     // Add position order
-    //     $permintaan = $permintaan->map(function ($item, $key) {
-    //         $item->row_index = $key + 1;
-    //         return $item;
-    //     });
-
-    //     $filteredPermintaan = $permintaan->filter(function ($item) use ($tahun, $bulan) {
-    //         $date = Carbon::parse($item->tgl_keluar);
-    //         return $date->year == $tahun && $date->month == $bulan;
-    //     });
-
-    //     $maxLenght = 28;
-    //     $length = round(count($filteredPermintaan)/$maxLenght);
-    //     // dd($length);
-    //     for($i = 0; $i <= $length; $i++)
-    //     {
-    //         $dummyData = $filteredPermintaan->slice($i*$maxLenght,$maxLenght);
-    //         // Initialize Mpdf
-    //         $combinedPdf = new Mpdf();
-
-    //         $pdfFiles = [];
-    //         $glyphIDtoUni =[];
-
-    //         foreach($dummyData as $request){
-    //             $templatePath = public_path('template.xlsx');
-    //             $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($templatePath);
-    //             $sheet = $spreadsheet->getActiveSheet();
-
-    //             $dummydate = $tahun . '-' . $bulan+1 . '-1';
-    //             $sheet->setCellValue('C' . 9, $request->nama_pemakai);
-    //             $sheet->setCellValue('F' . 9, "No. ".$request->row_index);
-    //             $sheet->setCellValue('F' . 10, "Dibukukan : ". carbon::parse($dummydate)->startOfMonth()->translatedFormat('j F Y'));
-    //             $sheet->setCellValue('E' . 30, "Padang Panjang, ". carbon::parse($request->tgl_keluar)->translatedFormat('j F Y'));
-    //             $sheet->setCellValue('E' . 35, $request->nama_pemakai);
-    //             $sheet->setCellValue('E' . 36, "NIP. ".$request->nip_pemakai);
-
-    //             $details = $data -> where('tgl_keluar', $request->tgl_keluar)
-    //                             -> where('pemakai', $request->kode_pemakai);
-
-    //             // dd($details);
-
-    //             $row = 14;
-    //             foreach ($details as $detail) {
-    //                 $sheet->setCellValue('A' . $row, $row-13);
-    //                 $sheet->setCellValue('B' . $row, " ".$barang->where('kode_barang',$detail->kode_barang)->pluck('nama_barang')->first());
-    //                 $sheet->setCellValue('D' . $row, $detail->kuantitas);
-    //                 $sheet->setCellValue('E' . $row, $detail->kuantitas);
-    //                 $sheet->setCellValue('F' . $row, $barang->where('kode_barang',$detail->kode_barang)->pluck('satuan')->first());
-    //                 $row++;
-    //             }
-
-    //             $pdfWriter = new PdfWriter($spreadsheet);
-    //             $pdfFile = storage_path('app/invoice/' . $request->tgl_keluar.'_'.$request->nama_pemakai.'.pdf');
-    //             $pdfWriter->save($pdfFile);
-    //             $pdfFiles[] = $pdfFile;
-    //         }
-
-    //         // Zip creation
-    //         $zip = new ZipArchive();
-    //         $zipFileName = 'KwitansiPermintaan_' . $tahun . sprintf('%02d', $bulan) . '.zip';
-    //         $zipFilePath = storage_path('app/invoice/' . $zipFileName);
-
-    //         if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
-    //             foreach ($pdfFiles as $pdfFile) {
-    //                 $fileNameInZip = basename($pdfFile); // Get only the filename
-    //                 $zip->addFile($pdfFile, $fileNameInZip);
-    //             }
-    //             $zip->close();
-
-    //         foreach ($pdfFiles as $file) {
-    //             if (file_exists($file)) {
-    //                 unlink($file);
-    //             }
-    //         }
-
-    //         // Now you can return a download response for the zip file
-    //         return response()->download($zipFilePath)->deleteFileAfterSend(true);
-    //         } else {
-    //             // Handle zip creation failure
-    //             return response('Failed to create ZIP file', 500);
-    //         }
-    //     }
-    // }
 }
 
 
