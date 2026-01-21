@@ -46,9 +46,7 @@ class TransaksimasukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'no_bon'=> 'required',
             'kode_barang'=> 'required',
-            'harga'=> 'required',
             'kuantitas'=> 'required',
             'tgl_masuk'=> 'required',
         ]);
@@ -62,8 +60,8 @@ class TransaksimasukController extends Controller
                 'kuantitas'=> $request->kuantitas,
                 'tgl_masuk'=> $request->tgl_masuk,
                 'created_by' => Auth::user()->id,
-            ]);     
-    
+            ]);
+
 
         if (Opname::where('kode_barang', $request->kode_barang )->first()) {
             //jika kode barang ada maka update entitas tersebut
@@ -72,7 +70,7 @@ class TransaksimasukController extends Controller
             $tm->quantity_opname = $tm->quantity_opname +$request->kuantitas;
             $tm->created_by = Auth::user()->id;
             $tm->updated_at = now();
-            $tm->save();            
+            $tm->save();
         } else {
             //jika kode barang ga ada, maka buat entitas baru di transaksi masuk
             $opname = Opname::create([
@@ -80,14 +78,14 @@ class TransaksimasukController extends Controller
                 'quantity'=> $request->kuantitas,
                 'quantity_opname'=> $request->kuantitas,
                 'created_by' => Auth::user()->id,
-            ]);       
-            
+            ]);
+
         }
-       
-        
 
 
-        // redirect 
+
+
+        // redirect
         return redirect()->route('transaksimasuk.index')
                         ->with('success','Data Transaksi Masuk Successfuly inserted');
     }
@@ -125,7 +123,7 @@ class TransaksimasukController extends Controller
     public function update(Request $request, $id)
     {
         $transaksimasuk = Transaksimasuk::find($id);
-        $tm = Opname::find($transaksimasuk->kode_barang); 
+        $tm = Opname::find($transaksimasuk->kode_barang);
 
         if ($tm) #update table stock
         {
@@ -133,15 +131,15 @@ class TransaksimasukController extends Controller
             $tm->quantity_opname = $tm->quantity_opname - $transaksimasuk->kuantitas + $request->kuantitas;
             $tm->created_by = '1';
             $tm->updated_at = now();
-            $tm->save();   
-        }      
-       
+            $tm->save();
+        }
+
         if($transaksimasuk) {
             $transaksimasuk->no_bon = $request->no_bon;
             $transaksimasuk->harga = $request->harga;
             $transaksimasuk->kuantitas = $request->kuantitas;
             $transaksimasuk->tgl_masuk = $request->tgl_masuk;
-            $transaksimasuk->created_by = 1;           
+            $transaksimasuk->created_by = 1;
             $transaksimasuk->updated_at = now()->timestamp;
             $transaksimasuk->save();
         }
@@ -162,7 +160,7 @@ class TransaksimasukController extends Controller
         $tm->quantity_opname = $tm->quantity_opname - $barang->kuantitas;
         $tm->created_by = '1';
         $tm->updated_at = now();
-        $tm->save();   
+        $tm->save();
 
         $barang->delete();
         return redirect('/transaksimasuk');
